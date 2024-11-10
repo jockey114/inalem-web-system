@@ -147,7 +147,8 @@ function searchLocation(query, map) {
                     timestamp: new Date().toISOString(),
                 };
 
-                queueNotification(notification); // Queue the notification
+                notifications.unshift(notification); // Add directly to notifications array
+               
             } else {
                 alert('Location not found');
             }
@@ -174,7 +175,7 @@ function showNotification() {
 
             // Check if the notification is a location search
             if (notif.action === "Location Search") {
-                notificationItem.innerHTML = `<strong>Action:</strong> ${notif.action} - <strong>Location:</strong> ${notif.location} - <strong>Timestamp:</strong> ${notif.timestamp}`;
+                notificationItem.innerHTML = `<strong>Location:</strong> ${notif.location} - <strong>Timestamp:</strong> ${notif.timestamp}`;
             } else if (notif.action === "Login") {
                 notificationItem.innerHTML = `<strong>Action:</strong> ${notif.action} - <strong>Email:</strong> ${notif.email} - <strong>Timestamp:</strong> ${notif.timestamp}`;
             }
@@ -189,8 +190,6 @@ function showNotification() {
     notificationModal.style.display = 'block';
     isNotificationOpen = true;
 }
-
-
 
 // Function to hide the notification indicator
 function hideNotificationIndicator() {
@@ -235,9 +234,6 @@ function showLoginForm() {
     document.querySelector('.container').style.display = 'block';
     document.getElementById('map-container').style.display = 'none';
 }
-
-
-
 
 // Dummy functions to simulate login and signup
 function login(event) {
